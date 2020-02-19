@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #outer {
+            width: 640px;
+            height: 400px;
+            background-color: pink;
+            margin: 100px auto;
+            padding: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #imgList {
+            /* width: 3100px; */
+            height: 400px;
+            list-style: none;
+            position: absolute;
+            left: 0;
+        }
+
+        #imgList li {
+            float: left;
+            margin: 0 20px;
+        }
+
+        #imgList img {
+            width: 600px;
+            height: 400px;
+        }
+
+        #litBtn {
+            position: absolute;
+            bottom: 30px;
+            left: 200px;
+            /* background-color: black; */
+        }
+
+        #litBtn a {
+            float: left;
+            width: 10px;
+            height: 10px;
+            background-color: pink;
+            margin: 8px;
+            opacity: 0.8;
+            filter: alpha(opacity="80");
+        }
+
+        #litBtn a:hover {
+            background-color: black;
+            opacity: 0.5;
+            filter: alpha(opacity="50");
+        }
+
+        #outer button {
+            position: absolute;
+            width: 50px;
+            height: 100%;
+            top: 0px;
+            font: bolder 20px/440px "微软雅黑";
+            color: white;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            opacity: 0.5;
+            filter: alpha(opacity="50");
+        }
+
+        #left {
+            left: 0;
+        }
+
+        #right {
+            right: 0;
+        }
+
+        #outer button:hover {
+            background-color: black;
+            opacity: 0.2;
+            filter: alpha(opacity="20");
+        }
+
+        #outer button:active {
+            background-color: rgb(50, 50, 50);
+            opacity: 0.7;
+            filter: alpha(opacity="70");
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var outer = document.querySelector("#outer");
+            var imgList = document.querySelector("#imgList");
+            var img = document.querySelectorAll("#imgList img");
+            var litBtn = document.querySelector("#litBtn");
+            var allA = document.querySelectorAll("#litBtn a");
+            var leftBtn = document.querySelector("#left");
+            var rightBtn = document.querySelector("#right");
+            var index = 1;
+            imgList.style.left = -outer.offsetWidth*index + "px";
+            imgList.style.width = outer.offsetWidth * img.length + "px";
+            litBtn.style.left = (outer.offsetWidth - litBtn.offsetWidth) / 2 + "px";
+            allA[0].style.backgroundColor = "black";
+            for (var i = 0; i < allA.length; i++) {
+                allA[i].num = i;
+                allA[i].onclick = function () {
+                    clearInterval(timer);
+                    index = this.num+1;
+                    setA();
+                    target = -outer.offsetWidth * index;
+                    move(imgList, "left", 50, target, function () {
+                        autoMove();
+                    });
+                }
+            }
+
+            autoMove();
+
+            leftBtn.onclick = function () {
+                clearInterval(timer);
+                index -= 1;
+                target = -outer.offsetWidth * index;
+                move(imgList, "left", 50, target, function () {
+                    setA();
+                    autoMove();
+               })
+           }
+            rightBtn.onclick = function () {
+                clearInterval(timer);
+                index += 1;
+                target = -outer.offsetWidth * index;
+                move(imgList, "left", 50, target, function () {
+                    setA();
+                    autoMove();
+               })
+           }
+
+            function setA() {
+                if (index > img.length - 2) {
+                    index = 1;
+                    imgList.style.left = -640*index + "px";
+                }else if(index < 1){
+                    index = img.length - 2;
+                    imgList.style.left = -640*index + "px";
+                }
+                for (var i = 0; i < allA.length; i++) {
+                    allA[i].style.backgroundColor = "";
+                }
+                allA[index-1].style.backgroundColor = "black";
+            }
+            //autoMove的定时器
+            var timer
+            //自动播放功能
+            function autoMove() {
+                timer = setInterval(function () {
+                    index++;
+                    //index = index % img.length;等价于
+                    // if (index > img.length-1) {
+                    //     index = 0;
+                    // }
+                    index = index % img.length;
+                    target = -outer.offsetWidth * index;
+                    move(imgList, "left", 50, target, function () {
+                        setA();
+                    });
+
+                }, 2000);
+            }
+        }
+    </script>sdc
+    <script type="text/javascript" src="./tools/myTools.js"></script>
+</head>
+
+<body>
+    <div id="outer">
+        <ul id="imgList">
+            <li><img src="./photos/5.jpg" alt=""></li>
+            <li><img src="./photos/1.jpg" alt=""></li>
+            <li><img src="./photos/2.jpg" alt=""></li>
+            <li><img src="./photos/3.jpg" alt=""></li>
+            <li><img src="./photos/4.jpg" alt=""></li>
+            <li><img src="./photos/5.jpg" alt=""></li>
+            <li><img src="./photos/1.jpg" alt=""></li>
+        </ul>
+        <div id="litBtn">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+        <button id="left">&lt;</button>
+        <button id="right">&gt;</button>
+    </div>
+</body>
+
+</html>

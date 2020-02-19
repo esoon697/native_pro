@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="cn-zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>小张的水星记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: black;
+        }
+
+        .all {
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            perspective: 500px;
+            -webkit-perspective: 500px;
+            /* perspective-oirgin: 300% 200%; */
+        }
+
+        .box {
+            margin: 200px auto 100px;
+            width: 300px;
+            height: 300px;
+            /*border: 1px solid #ccc;*/
+            transform-origin: center center -50px;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            animation: threeDbox 9s linear infinite;
+            /* -webkit-animation: threeDbox 10s linear infinite alternate both;
+            -moz-animation: threeDbox 10s linear infinite alternate both;
+            -o-animation: threeDbox 10s linear infinite alternate both; */
+            /* transform: rotate3d(1,1,1,45deg); */
+
+        }
+
+        audio {
+            width: 350px;
+            height: 50px;
+            display: block;
+        }
+
+        .layer {
+            background-color: #000;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            color: #fff;
+            line-height: 100px;
+            font-size: 50px;
+            text-align: center;
+            transition: 4s ease;
+            -webkit-transition: 4s ease;
+            opacity: 0.5;
+            /* backface-visibility: hidden; */
+        }
+
+        .layer:nth-of-type(1) {
+            top: 100px;
+            left: 100px;
+            background: url("./photos/1.jpg") center/cover no-repeat;
+        }
+
+        .layer:nth-of-type(2) {
+            top: 0px;
+            left: 100px;
+            background: url("./photos/2.jpg") center/cover no-repeat;
+            transform: rotateX(90deg);
+            transform-origin: bottom;
+            /* -webkit-transform: rotateX(90deg);
+            -webkit-transform-origin: bottom;
+            -moz-transform: rotateX(90deg);
+            -moz-transform-origin: bottom;
+            -ms-transform: rotateX(90deg);
+            -ms-transform-origin: bottom; */
+        }
+
+        .layer:nth-of-type(3) {
+            top: 200px;
+            left: 100px;
+            background: url("./photos/3.jpg") center/cover no-repeat;
+            transform: rotateX(-90deg);
+            transform-origin: top;
+            /* -webkit-transform: rotateX(90deg);
+            -webkit-transform-origin: top; */
+        }
+
+        .layer:nth-of-type(4) {
+            top: 100px;
+            left: 100px;
+            background: url("./photos/4.jpg") center/cover no-repeat;
+            /*background-image: url("8.jpg");*/
+            transform: rotateX(180deg) translateZ(100px);
+            /* -webkit-transform: translateZ(100px); */
+        }
+
+        .layer:nth-of-type(5) {
+            top: 100px;
+            left: 0;
+            background: url("./photos/5.jpg") center/cover no-repeat;
+            transform: rotateY(-90deg);
+            transform-origin: right;
+            /* -webkit-transform: rotateY(90deg);
+            -webkit-transform-origin: right; */
+        }
+
+        .layer:nth-of-type(6) {
+            top: 100px;
+            left: 200px;
+            background: url("./photos/6.jpg") center/cover no-repeat;
+            transform: rotateY(90deg);
+            transform-origin: left;
+            /* -webkit-transform: rotateY(-90deg);
+            -webkit-transform-origin: left; */
+        }
+
+        @keyframes threeDbox {
+            0% {
+                /* transform: rotate3d(1,1,-1,45deg) */
+                transform: rotateX(45deg) rotateY(-45deg) ;
+            }
+
+            /* 25%{transform: rotateY(-45deg) rotateX(30deg) rotate(60deg)} */
+            /* 50% {
+                transform: rotateY(405deg) rotateX(405deg) rotate(-360deg);
+                perspective-origin: 50% 0;
+            } */
+
+            /*75%{transform: rotateY(80deg) rotateX(180deg) rotate(100deg)}*/
+            100% {
+                /* transform: rotateY(45deg) rotateX(45deg) rotate(0deg); */
+                /* transform: rotate3d(1,1,-1,405deg) */
+                transform: rotateX(765deg) rotateY(-405deg);
+            }
+        }
+
+        /*@-moz-keyframes threeDbox {*/
+        /*    0% {*/
+        /*        transform: rotateY(45deg) rotateX(45deg) rotate(0deg)*/
+        /*    }*/
+        /*    !*25%{transform: rotateY(-45deg) rotateX(30deg) rotate(60deg)}*!*/
+        /*    50%{transform: rotateY(0deg) rotateX(0deg) rotate(90deg)}*/
+        /*    !*75%{transform: rotateY(80deg) rotateX(180deg) rotate(100deg)}*!*/
+        /*    100% {*/
+        /*        transform: rotateY(540deg) rotateX(-540deg) rotate(-540deg)*/
+        /*    }*/
+        /*}*/
+
+        /*@-webkit-keyframes threeDbox {*/
+        /*    0% {*/
+        /*        transform: rotateY(45deg) rotateX(45deg) rotate(0deg)*/
+        /*    }*/
+        /*    !*25%{transform: rotateY(-45deg) rotateX(30deg) rotate(60deg)}*!*/
+        /*    50%{transform: rotateY(0deg) rotateX(0deg) rotate(45deg)}*/
+        /*    !*75%{transform: rotateY(80deg) rotateX(180deg) rotate(100deg)}*!*/
+        /*    100% {*/
+        /*        transform: rotateY(540deg) rotateX(-540deg) rotate(-540deg)*/
+        /*    }*/
+        /*}*/
+
+        /*@-o-keyframes threeDbox {*/
+        /*    0% {*/
+        /*        transform: rotateY(45deg) rotateX(45deg) rotate(0deg)*/
+        /*    }*/
+        /*    !*25%{transform: rotateY(-45deg) rotateX(30deg) rotate(60deg)}*!*/
+        /*    50%{transform: rotateY(0deg) rotateX(0deg) rotate(45deg)}*/
+        /*    !*75%{transform: rotateY(80deg) rotateX(180deg) rotate(100deg)}*!*/
+        /*    100% {*/
+        /*        transform: rotateY(540deg) rotateX(-540deg) rotate(-540deg)*/
+        /*    }*/
+        /*}*/
+
+        .box:hover .layer {
+            box-shadow: -10px 10px 10px white,
+                -10px -10px 10px white,
+                10px 10px 10px white,
+                10px -10px 10px white;
+            border-radius: 100%;
+            opacity: 1;
+        }
+
+        .box:hover .layer:nth-child(1) {
+
+            transform: translateZ(75px) scale(1.5);
+        }
+
+        .box:hover .layer:nth-child(2) {
+
+            transform: rotateX(90deg) translateZ(100px) scale(1.5);
+        }
+
+        .box:hover .layer:nth-child(3) {
+
+            transform: rotateX(-90deg) translateZ(100px) scale(1.5);
+        }
+
+        .box:hover .layer:nth-child(4) {
+
+            transform: rotateX(180deg) translateZ(225px) scale(1.5);
+        }
+
+        .box:hover .layer:nth-child(5) {
+
+            transform: rotateY(-90deg) translateZ(100px) scale(1.5);
+        }
+
+        .box:hover .layer:nth-child(6) {
+
+            transform: rotateY(90deg) translateZ(100px) scale(1.5);
+        }
+        .layer a{
+            display: block;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="all">
+        <div class="box" id="box">
+            <div class="layer"><a href="./20190912.时钟.html"></a></div>
+            <div class="layer"><a href="./20190912.时钟.html"></a></div>
+            <div class="layer"><a href="./20190912.时钟.html"></a></div>
+            <div class="layer"><a href="./20190912.时钟.html"></a></div>
+            <div class="layer"><a href="./20190912.时钟.html"></a></div>
+            <div class="layer"><a href="./20190912.时钟.html"></a></div>
+        </div>
+        <div class="audiobox" style="outline: none;">
+            <audio id="bgm" controls loop autoplay="autoplay" src="./music/849981633.mp3" style="outline: none;">
+                <source src="./music/849981633.mp3" type="audio/mp3">
+                <!--        <source type="audio/mp3" src="http://win.web.ri01.sycdn.kuwo.cn/ff848c282e511315168c1a0f3d45fd13/5d554ccb/resource/n3/52/96/849981633.mp3">-->
+                <span style="color: white">Your browser does not support the audio element.</span>
+            </audio>
+        </div>
+    </div>
+</body>
+
+</html>

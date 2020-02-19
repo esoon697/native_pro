@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #outer {
+            width: 600px;
+            height: 400px;
+            /* background-color: pink; */
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #imgList {
+            list-style: none;
+            /* position: absolute; */
+            left: 0;
+        }
+
+        .items {
+            width: 600px;
+            height: 400px;
+            position: absolute;
+            /* display: none; */
+            opacity: 0;
+            transition: all 1s linear;
+        }
+
+        .items:nth-child(1) {
+            background-color: red;
+        }
+
+        .items:nth-child(2) {
+            background-color: yellow;
+        }
+
+        .items:nth-child(3) {
+            background-color: blue;
+        }
+
+        .items:nth-child(4) {
+            background-color: green;
+        }
+
+        .items:nth-child(5) {
+            background-color: fuchsia;
+        }
+
+        /* #imgList .active{
+            display: block;
+        } */
+
+        #imgList img {
+            width: 600px;
+            height: 400px;
+            transition: width 1s linear;
+        }
+
+        /* #imgList img:hover{
+            display: none;
+        } */
+        #litBtn {
+            position: absolute;
+            left: 200px;
+            bottom: 30px;
+        }
+
+        #litBtn a {
+            float: left;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            margin: 8px;
+            opacity: 0.8;
+            filter: alpha(opacity="80");
+        }
+
+        #litBtn a:hover {
+            background-color: black;
+            opacity: 0.5;
+            filter: alpha(opacity="50");
+        }
+
+        #outer button {
+            position: absolute;
+            width: 50px;
+            height: 100%;
+            top: 0px;
+            font: bolder 20px/440px "微软雅黑";
+            color: white;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            opacity: 0.5;
+            filter: alpha(opacity="50");
+        }
+
+        #left {
+            left: 0;
+        }
+
+        #right {
+            right: 0;
+        }
+
+        #outer button:hover {
+            background-color: black;
+            opacity: 0.2;
+            filter: alpha(opacity="20");
+        }
+
+        #outer button:active {
+            background-color: rgb(50, 50, 50);
+            opacity: 0.7;
+            filter: alpha(opacity="70");
+        }
+
+        #imgList .active {
+            opacity: 1;
+        }
+
+        #litBtn .active {
+            background-color: black;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var outerDiv = document.querySelector("#outer");
+            var imgList = document.querySelector("#imgList");
+            var allLi = document.querySelectorAll("#imgList li");
+            var allImg = document.querySelectorAll("#imgList img");
+            var litBtn = document.querySelector("#litBtn");
+            var allA = document.querySelectorAll("#litBtn a");
+            var leftBtn = document.querySelector("#left");
+            var rightBtn = document.querySelector("#right");
+            var index = 0;
+            console.log(litBtn.offsetWidth);
+            litBtn.style.left = (outerDiv.clientWidth - litBtn.clientWidth)/2 + "px";
+            // console.log("outerDiv:"+outerDiv.offsetWidth+" litBtn:"+litBtn.offsetWidth+" left:"+litBtn.style.left+" zhi:"+((outerDiv.offsetWidth - litBtn.offsetWidth) / 2 + "px"));
+            // for(var i = 0; i<allA.length; i++){
+            //     allA[i].num = i;
+            //     allA[i].onclick = function () {
+            //         index = this.num;
+            //         // for(var i = 0; i<allA.length; i++){
+            //         //     allA[i].style.backgroundColor = "white";
+            //         // }
+            //         // allA[index].style.backgroundColor = "black";
+            //         // allA[index].className = "active";
+            //         addClass(allA[index],"active");
+            //         // addClass(allLi[index],"active");
+            //         if(!(index == current)){
+            //             // var res = allA[current].className.replace(/\bactive\b/,"");
+            //             // allA[current].className = res;
+            //             removeClass(allA[current],"active");
+            //             // removeClass(allLi[current],"active");
+            //         }
+            //         current = index;
+            //         allLi[index].style.backgroundColor = ""
+            //     }
+            // }
+            var clearActive = function () {
+                for (var i = 0; i < allLi.length; i++) {
+                    allLi[i].className = "items";
+                    allA[i].className = "";
+                }
+            }
+
+            var goRight = function () {
+                clearActive();
+                index++;
+                if (index > allLi.length - 1) {
+                    index = 0;
+                }
+                allLi[index].className = "items active";
+                allA[index].className = "active";
+            }
+
+            var goLeft = function () {
+                clearActive();
+                index--;
+                if (index < 0) {
+                    index = allLi.length - 1;
+                }
+                allLi[index].className = "items active";
+                allA[index].className = "active";
+            }
+            var goRightAuto = goRight
+
+            myBind(rightBtn, "click", goRight);
+
+            myBind(leftBtn, "click", goLeft);
+
+            setInterval(function () {
+                goRightAuto();
+            }, 2000);
+
+            for (var i = 0; i < allLi.length; i++) {
+                allA[i].num = i
+                myBind(allA[i], "click", function () {
+                    index = this.num -1;
+                    goRight();
+                });
+            }
+
+            myBind(outerDiv, "mouseover", function () {
+                goRightAuto = function () {};
+            });
+            myBind(outerDiv, "mouseleave", function () {
+                goRightAuto = goRight;
+            });
+
+            function myBind(obj, eventstr, callbackFun) {
+                if (obj.addEventListener) {
+                    obj.addEventListener(eventstr, callbackFun, false)
+                } else {
+                    obj.attachEvent("on" + eventstr, function () {
+                        callbackFun.call(obj);
+                        //callbackFun.call(obj),该方法中的回调函数中的this也指向调用对象
+                    })
+                }
+            }
+        }
+    </script>
+    <script src="./tools/myTools.js"></script>
+</head>
+
+<body>
+    <div id="outer">
+        <ul id="imgList">
+            <li class="items active"><img src="./photos/1.jpg" alt=""></li>
+            <li class="items"><img src="./photos/2.jpg" alt=""></li>
+            <li class="items"><img src="./photos/3.jpg" alt=""></li>
+            <li class="items"><img src="./photos/4.jpg" alt=""></li>
+            <li class="items"><img src="./photos/5.jpg" alt=""></li>
+        </ul>
+        <div id="litBtn">
+            <a class="active" href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+        <button id="left">&lt;</button>
+        <button id="right">&gt;</button>
+    </div>
+</body>
+
+</html>

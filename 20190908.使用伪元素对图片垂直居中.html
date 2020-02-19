@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用伪元素对图片垂直居中</title>
+    <style>
+                .center {
+            height: 400px;
+            width: 400px;
+            background-color: rgba(256, 1, 1, 1);
+            text-align: center;
+            resize: both;
+            overflow: auto;
+        }
+
+        .center::after{
+            content: "";
+            display: inline-block;
+            width: 2px;
+            background-color: black;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        img {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+        <div class="center"><img src="E:/HtmlLearnning/HTML5/Polo360/img/pic/pic1.jpg" alt=""></div>
+</body>
+</html>

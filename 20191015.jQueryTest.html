@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .btn {
+            float: left;
+            width: 50px;
+            height: 30px;
+            list-style: none;
+            text-decoration: none;
+            color: white;
+        }
+
+        #btn1 {
+            background-color: red;
+        }
+
+        #btn2 {
+            background-color: yellow;
+        }
+
+        #btn3 {
+            background-color: pink;
+        }
+
+        .btnActive {
+            border: 1px solid white;
+            box-sizing: border-box;
+        }
+
+        .content {
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            visibility: hidden;
+        }
+
+        #box1 {
+            background-color: red;
+        }
+
+        #box2 {
+            background-color: yellow;
+        }
+
+        #box3 {
+            background-color: pink;
+        }
+
+        .contActive {
+            visibility: visible;
+        }
+
+        .clearfix::before,
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="allBtn clearfix">
+        <a class="btn btnActive" id="btn1" href="javascript:;">btn1</a>
+        <a class="btn" id="btn2" href="javascript:;">btn2</a>
+        <a class="btn" id="btn3" href="javascript:;">btn3</a>
+    </div>
+    <div id="cont">
+        <div class="content contActive" id="box1"></div>
+        <div class="content" id="box2"></div>
+        <div class="content" id="box3"></div>
+    </div>
+    <script src="./jquery-1.12.3.js"></script>
+    <script>
+        var current = 0;
+        $(".btn").click(function () {
+            // $(".btn")[current].className = "btn";
+            // console.log($(".btn")[current].className);
+            // $(".content")[current].className = "btn";
+            $($(".btn")[current]).removeClass("btnActive");
+            $($(".content")[current]).removeClass("contActive");
+            var index = $(this).index();
+            $($(".btn")[index]).addClass("contActive");
+            $($(".content")[index]).addClass("contActive");
+            $($(".content")[index]).offset({left:100,top:100});
+            current = index;
+        });
+    </script>
+
+</body>
+
+</html>

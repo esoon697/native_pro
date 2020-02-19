@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .clock {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 2px dashed;
+            background-color: #dedede;
+            /* animation: myStyle 10s linear infinite; */
+        }
+
+        .second {
+            position: absolute;
+            width: 5px;
+            height: 115px;
+            top: 25px;
+            left: 122.5px;
+            border-radius: 50% 50% 0 0;
+            background-color: pink;
+            transform-origin: 50% 86.96%;
+            /* animation: myStyle 60s linear infinite; */
+        }
+
+        .minute {
+            position: absolute;
+            width: 8px;
+            height: 90px;
+            top: 45px;
+            left: 121px;
+            border-radius: 50% 50% 0 0;
+            background-color: hotpink;
+            transform-origin: 50% 88.89%;
+            /* animation: myStyle 3600s linear infinite; */
+        }
+
+        .hour {
+            position: absolute;
+            width: 15px;
+            height: 55px;
+            top: 75px;
+            left: 117.5px;
+            border-radius: 50% 50% 0 0;
+            background-color: red;
+            transform-origin: 50% 90.09%;
+            animation: myStyle 43200s linear infinite;
+        }
+
+        .center {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            background-color: #000;
+        }
+
+        .scale {
+            border: 1px solid black;
+            width: 0;
+            height: 3px;
+            position: absolute;
+            left: 125px;
+            transform-origin: 0 125px;
+        }
+
+        .scale:nth-child(5n) {
+            border: 1px solid gray;
+            width: 0;
+            height: 10px;
+        }
+
+        .shadow {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-color: #000;
+            text-align: center;
+            font: 600 20px/635px '微软雅黑';
+            color: white;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="shadow">加载中。。。</div>
+    <div class="clock">
+        <div class="center"></div>
+        <div class="hour"></div>
+        <div class="minute"></div>
+        <div class="second"></div>
+    </div>
+    <script>
+        let shadow = document.querySelector('.shadow');
+        let clock = document.querySelector('.clock');
+        let domHour = document.querySelector('.hour');
+        let domMinute = document.querySelector('.minute');
+        let domSecond = document.querySelector('.second');
+        let getTime = function () {
+            let now = new Date();
+            let hour = now.getHours()
+            let minute = now.getMinutes();
+            let second = now.getSeconds();
+            console.log(hour, minute, second);
+            domHour.style.cssText = 'transform: rotate(' + (hour * 30 + minute / 60 * 30) + 'deg)'
+            domMinute.style.cssText = 'transform: rotate(' + (minute * 6 + second / 360 * 6) + 'deg)'
+            domSecond.style.cssText = 'transform: rotate(' + (second * 6) + 'deg)'
+        }
+        setInterval(() => {
+            getTime();
+        }, 1000);
+        for (let i = 0; i < 60; i++) {
+            let scale = document.createElement('div');
+            scale.className = 'scale'
+            clock.appendChild(scale)
+            scale.style.cssText = 'transform: rotate(' + i * 6 + 'deg)'
+        }
+        setTimeout(function () {
+            shadow.style.cssText = 'display: none'
+        }, 1000)
+    </script>
+</body>
+
+</html>

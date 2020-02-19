@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #outer {
+            width: 600px;
+            height: 400px;
+            /* background-color: pink; */
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #imgList {
+            width: 1200px;
+            list-style: none;
+            position: absolute;
+            left: 0;
+        }
+
+        .items {
+            width: 600px;
+            height: 400px;
+            position: absolute;
+            opacity: 0;
+        }
+
+        .items:nth-child(1) {
+            background-color: red;
+        }
+
+        .items:nth-child(2) {
+            background-color: yellow;
+        }
+
+        .items:nth-child(3) {
+            background-color: blue;
+        }
+
+        .items:nth-child(4) {
+            background-color: green;
+        }
+
+        .items:nth-child(5) {
+            background-color: fuchsia;
+        }
+
+        /* #imgList .active{
+            display: block;
+        } */
+
+        #imgList img {
+            width: 600px;
+            height: 400px;
+        }
+
+        /* #imgList img:hover{
+            display: none;
+        } */
+        #litBtn {
+            position: absolute;
+            left: 200px;
+            bottom: 30px;
+        }
+
+        #litBtn a {
+            float: left;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            margin: 8px;
+            opacity: 0.8;
+            filter: alpha(opacity="80");
+        }
+
+        #litBtn a:hover {
+            background-color: black;
+            opacity: 0.5;
+            filter: alpha(opacity="50");
+        }
+
+        #outer button {
+            position: absolute;
+            width: 50px;
+            height: 100%;
+            top: 0px;
+            font: bolder 20px/440px "微软雅黑";
+            color: white;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            opacity: 0.5;
+            filter: alpha(opacity="50");
+        }
+
+        #left {
+            left: 0;
+        }
+
+        #right {
+            right: 0;
+        }
+
+        #outer button:hover {
+            background-color: black;
+            opacity: 0.2;
+            filter: alpha(opacity="20");
+        }
+
+        #outer button:active {
+            background-color: rgb(50, 50, 50);
+            opacity: 0.7;
+            filter: alpha(opacity="70");
+        }
+
+        .imgActive {
+            opacity: 1;
+            /* display: inline; */
+            /* display: block; */
+            /* float: left; */
+        }
+
+        #litBtn .active {
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <ul id="imgList">
+            <li class="items imgActive"><img src="./photos/1.jpg" alt=""></li>
+            <li class="items"><img src="./photos/3.jpg" alt=""></li>
+            <li class="items"><img src="./photos/2.jpg" alt=""></li>
+            <li class="items"><img src="./photos/4.jpg" alt=""></li>
+            <li class="items"><img src="./photos/5.jpg" alt=""></li>
+        </ul>
+        <div id="litBtn">
+            <a class="active" href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+        <button id="left">&lt;</button>
+        <button id="right">&gt;</button>
+    </div>
+    <script src="./jquery-1.12.3.js"></script>
+    <script src="./tools/myTools.js"></script>
+    <script>
+        var $items = $(".items");
+        var $imgList = $("#imgList");
+        var $allA = $("#litBtn>a");
+        var index = 0;
+        var moving = false; //通过判断动画的状态，实现防止多次点击重复调用函数的功能，初始状态为false
+
+        //清除class中的active
+        var clearActive = function () {
+            $items.removeClass("imgActive");
+            $allA.removeClass("active");
+        }
+
+        //定义向右切换的函数
+        var goRight = function () {
+            if(moving){
+                return;
+            }
+            moving = true;
+            index++;
+            if (index > $items.length - 1) {
+                index = 0;
+            }
+            $($items[index]).addClass("imgActive");
+            $items[index].style.left = $("#outer").width() + "px";
+            // move($imgList[0], "left", 10, -$("#outer").width(), function () {
+                // clearActive();
+                // $items.removeAttr("style");
+                // $imgList.removeAttr("style");
+                // $($items[index]).addClass("imgActive");
+                // $($allA[index]).addClass("active");
+                // // autoMove();
+                // moving = false;
+            // });
+            $imgList.stop().animate({
+                left: -$("#outer").width(),
+            },1000,function () {
+                clearActive();
+                $items.removeAttr("style");
+                $imgList.removeAttr("style");
+                $($items[index]).addClass("imgActive");
+                $($allA[index]).addClass("active");
+                // autoMove();
+                moving = false;
+            });
+        }
+
+        //定义向左切换的函数
+        var goLeft = function () {
+            if(moving){
+                return;
+            }
+            moving = true;
+            index--;
+            if (index < 0) {
+                index = $items.length - 1;
+            }
+            $($items[index]).addClass("imgActive");
+            $items[index].style.left = -$("#outer").width() + "px";
+            move($imgList[0], "left", 10, $("#outer").width(), function () {
+                clearActive();
+                $items.removeAttr("style");
+                $imgList.removeAttr("style");
+                $($items[index]).addClass("imgActive");
+                $($allA[index]).addClass("active");
+                // autoMove();
+                moving = false;
+            });
+        }
+
+        //定义自动切换函数
+        var goRightAuto = goRight;
+        var timer;
+        function autoMove() {
+            // clearInterval(timer);
+            timer = setInterval(function () {
+                // index++;
+                // if (index > $items.length - 1) {
+                //     index = 0;
+                // }
+                goRightAuto();
+            }, 3000);
+        }
+
+        //调用自动切换函数，实现自动轮播功能
+        autoMove();
+
+        //给向右切换按钮绑定切换函数
+        $("#right").click(function () {
+            // clearInterval(timer);
+            // index++;
+            // if (index > $items.length - 1) {
+            //     index = 0;
+            // }
+            goRight();
+        });
+
+        //给向左切换按钮绑定切换函数
+        $("#left").click(function () {
+            // clearInterval(timer);
+            // index--;
+            // if (index < 0) {
+            //     index = $items.length - 1;
+            // }
+            goLeft();
+        });
+
+        //轮播按钮绑定切换函数
+        $allA.click(function () {
+            // clearInterval(timer);
+            var current = index;
+            index = $(this).index();
+            console.log("current:"+current,"index:"+index);
+            if (current != index) {
+                if (current < index) {
+                    //由于进入goright函数后会index++，所以先减1以保持index值不变
+                    index = index - 1;
+                    goRight();
+                } else {
+                    index = index + 1;
+                    console.log(index);
+                    goLeft();
+                }
+                // console.log("current:"+current,"index:"+index);
+            }
+        });
+
+        //给容器绑定鼠标移动在元素上是取消自动切换功能的事件
+        $("#outer")
+        .mouseover(function () {
+            // clearInterval(timer);
+            goRightAuto = function () {};
+        })
+        //重新开启自动轮播
+        .mouseleave(function () {
+            goRightAuto = goRight;
+            // autoMove();
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 100px;
+            background-color: pink;
+            text-align: center;
+            position: absolute;
+        }
+        span{
+            border: 1px solid gray;
+            background-color: gray;
+        }
+        ul{
+            list-style: none;
+            font: 12px/1;
+            /* height: 0; */
+            overflow: hidden;
+            display: none;
+        }
+        ul li{
+            background-color: pink;
+            border-bottom: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <button id="button1">start</button>
+    <button id="button2">end</button>
+    <div class="box">
+        <!-- <span>haha</span>
+        <ul>
+            <li>fshkfh是否合适几个号缩地为uuhyfs</li>
+            <li>结果是地方规划</li>
+            <li>深刻的风格破碎机为ojdfsoi广佛四军或</li>
+            <li>深刻的风格破碎机为ojdfsoi广佛四军或</li>
+            <li>深刻的风格破碎机为ojdfsoi广佛四军或</li>
+            <li>深刻的风格破碎机为ojdfsoi广佛四军或</li>
+            <li>该为欧冠和搜到机加工偶尔的</li>
+            <li>org金额肉片加婆家人公平额</li>
+            <li>的国考热加工耳机哦</li>
+        </ul> -->
+    </div>
+    <script src="./jquery-1.12.3.js"></script>
+    <script>
+        var $span = $(".box span");
+        var $ul = $(".box ul");
+        var $div = $(".box");
+        var $button1 = $("#button1");
+        var $button2 = $("#button2");
+        // $span.hover(function () {
+        //     $ul.stop().slideDown(1000);
+        // },function () {
+        //     $ul.stop().slideUp(1000);
+        // });
+            $button1.click(function () {
+                $div.animate({
+                left:200,
+                top:100
+                },1000);
+            });
+            // $button2.click(function () {
+            //     $div.animate({
+            //     left:100,
+            //     top:200
+            //     },1000);
+            // });
+            $button2.click(function () {
+                $div.stop();
+            });
+    </script>
+</body>
+</html>

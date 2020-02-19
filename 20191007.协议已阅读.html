@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .outer {
+            width: 300px;
+            height: 400px;
+            background-color: pink;
+            overflow: auto;
+        }
+
+        .inner {
+            width: 100%;
+            /* height: auto; */
+        }
+
+        p {
+            text-indent: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="inner">
+            <p>adgajfdfsjif说过的俯拾地芥回划双方的发挥ISF设定粉红色刚开始干四度是的覅胡的方式来，粉丝分数官方sigh粉丝</p>
+            <p>adgajfdfsjif说过的俯拾地芥回划双方的发挥ISF设定粉红色刚开始干四度是的覅胡的方式来，粉丝分数官方sigh粉丝</p>
+            <p>adgajfdfsjif说过的俯拾地芥回划双方的发挥ISF设定粉红色刚开始干四度是的覅胡的方式来，粉丝分数官方sigh粉丝</p>
+            <p>adgajfdfsjif说过的俯拾地芥回划双方的发挥ISF设定粉红色刚开始干四度是的覅胡的方式来，粉丝分数官方sigh粉丝</p>
+            <p>adgajfdfsjif说过的俯拾地芥回划双方的发挥ISF设定粉红色刚开始干四度是的覅胡的方式来，粉丝分数官方sigh粉丝</p>
+        </div>
+    </div>
+    <div><input type="checkbox" id="looked"><label for="looked">已阅读</label></div>
+    <button>ok</button>
+    <script>
+        var button = document.querySelector("button");
+        var outer = document.getElementsByClassName("outer")[0];
+        var inner = document.getElementsByClassName("inner")[0];
+        var looked = document.getElementById("looked");
+        looked.disabled = true;
+        button.disabled = true;
+        // var m = outer.scrollHeight - outer.scrollTop;
+        console.log(outer.clientHeight);
+        outer.onscroll = function () {
+            var m = outer.scrollHeight - outer.scrollTop;
+            if (m == outer.clientHeight) {
+                looked.disabled = false;
+                button.disabled = false;
+            }
+        }
+        button.onclick = function () {
+            if(!looked.checked){
+                confirm("请阅读协议");
+            }
+        }
+    </script>
+</body>
+
+</html>

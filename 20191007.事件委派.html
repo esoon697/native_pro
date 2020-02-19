@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        a{
+
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <ul>
+            <li><span href="javascript:;" class="one">事件一</span></li>
+            <li><span href="javascript:;" class="one">事件二</span></li>
+            <li><span href="javascript:;" class="two">事件三</span></li>
+            <li><span href="javascript:;" class="two">事件三</span></li>
+            <li><span href="javascript:;" class="three">事件三</span></li>
+        </ul>
+        <button>新建</button>
+    </div>
+    <script>
+        var ul = document.querySelector("ul");
+        // var li = document.querySelectorAll("li");
+        var button = document.querySelector("button");
+        button.onclick = function(){
+            var li = document.createElement("li");
+            li.innerHTML = "<a href='javascript:;' class='link'>新事件</a>";
+            ul.appendChild(li);
+        }
+        ul.onclick = function(event){
+            event = event || window.event;
+            console.log(event.target.className);
+            if(event.target.className === "one"){
+                alert("hello one");
+            } else if (event.target.className === "two") {
+              alert('hello two')
+            } else {
+              alert('hello three')
+            }
+        }
+    </script>
+</body>
+</html>

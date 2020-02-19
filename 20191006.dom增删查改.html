@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        table,
+        tr,
+        th,
+        td {
+            border: 1px solid;
+            /* cellpadding: 0; */
+            border-collapse: collapse;
+            padding: 10px;
+            margin: 0 auto;
+        }
+
+        form {
+            width: 300px;
+            background-color: #dedede;
+            margin: 50px auto;
+            padding: 50px;
+            /* box-sizing: border-box; */
+            text-align: center
+        }
+
+        form div {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <table>
+            <tr>
+                <th>uname</th>
+                <th>password</th>
+                <th>action</th>
+            </tr>
+            <tr>
+                <td>tom</td>
+                <td>sss</td>
+                <td><a href="javascript:;"  class="delete">delete</a></td>
+            </tr>
+            <tr>
+                <td>july</td>
+                <td>sss</td>
+                <td><a href="#javascript:;"  class="delete">delete</a></td>
+            </tr>
+            <tr>
+                <td>sean</td>
+                <td>sss</td>
+                <td><a href="#javascript:;" class="delete">delete</a></td>
+            </tr>
+        </table>
+        <form action="javascript:;">
+            <div><label for="uname">用户名：</label><input type="text" id="uname"></div>
+            <div><label for="password">密&nbsp;&nbsp;&nbsp;码：</label><input type="text" id="password"></div>
+            <button>push</button>
+        </form>
+
+
+        <script>
+            var allA = document.querySelectorAll("table tr a");
+            var table = document.querySelector("table");
+            table.onclick = function(event){
+                // var tr = this.parentNode.parentNode;
+                //     // var uname = tr.firstElementChild.innerHTML
+                //     // var uname = tr.getElementsByTagName("td")[0].innerHTML;
+                //     var uname = tr.children[0].innerHTML;
+                //     var flag = confirm("确认删除" + uname);
+                //     if (flag) {
+                //         tr.parentNode.removeChild(tr);
+                //     }
+                event = event || window.event;
+                if(event.target.className == "delete"){
+                   var tr = event.target.parentNode.parentNode;
+                   var uname = tr.children[0].innerHTML;
+                   var flag = confirm("are you sure delete "+uname+"?");
+                   if(flag){
+                       tr.parentNode.removeChild(tr);
+                   }
+                }
+
+            }
+            // for (var i = 0; i < allA.length; i++) {
+            //     allA[i].onclick = function () {
+            //         var tr = this.parentNode.parentNode;
+            //         // var uname = tr.firstElementChild.innerHTML
+            //         // var uname = tr.getElementsByTagName("td")[0].innerHTML;
+            //         var uname = tr.children[0].innerHTML;
+            //         var flag = confirm("确认删除" + uname);
+            //         if (flag) {
+            //             tr.parentNode.removeChild(tr);
+            //         }
+            //     }
+            // }
+            var pushBtn = document.querySelector("form button");
+            pushBtn.onclick = function () {
+                // var tbody = document.getElementsByTagName("tbody")[0];
+                // var unameValue = document.getElementById("uname").value;
+                // var passwordValue = document.getElementById("password").value;
+                // var tr = document.createElement("tr");
+                // var unameTd = document.createElement("td");
+                // var passwordTd = document.createElement("td");
+                // var delTd = document.createElement("td");
+                // var a = document.createElement("a");
+                // var unameText = document.createTextNode(unameValue);
+                // var passwordText = document.createTextNode(passwordValue);
+                // var aText = document.createTextNode("delete");
+                // unameTd.appendChild(unameText);
+                // passwordTd.appendChild(passwordText);
+                // delTd.appendChild(a);
+                // a.appendChild(aText);
+                // a.href = "javascript:;"
+                // tr.appendChild(unameTd);
+                // tr.appendChild(passwordTd);
+                // tr.appendChild(delTd);
+                // tbody.appendChild(tr);
+                var tbody = document.querySelector("table tbody");
+                var unameValue = document.querySelector("#uname").value;
+                var passwordValue = document.querySelector("#password").value;
+                var tr = document.createElement("tr");
+                tr.innerHTML = "<td>"+unameValue+"</td>"+
+                                "<td>"+passwordValue+"</td>"+
+                                "<td><a href='javascript:;' class='delete'>delete</a></td>"
+                var a = tr.getElementsByTagName("a")[0]
+                a.href = "javascript:;"
+                tbody.appendChild(tr);
+                // a.onclick = function () {
+                //     var tr = this.parentNode.parentNode;
+                //     var uname = tr.children[0].innerHTML;
+                //     var flag = confirm("确认删除" + uname);
+                //     if (flag) {
+                //         tr.parentNode.removeChild(tr);
+                //     }
+                // }
+            }
+            // tableDelete.parentNode.removeChild(tableDelete);
+        </script>
+    </div>
+</body>
+
+</html>

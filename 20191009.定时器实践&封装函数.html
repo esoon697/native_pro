@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            margin: 150px 0;
+            position: absolute;
+            left: 500px;
+        }
+
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            position: absolute
+        }
+
+        #link {
+            height: 1000px;
+            border: 1px solid;
+            position: absolute;
+            left: 800px;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            var btn1 = document.getElementById("btn1");
+            var btn2 = document.getElementById("btn2");
+            var btn3 = document.getElementById("btn3");
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            var button = document.querySelectorAll("button");
+            autoMove(btn1, box1, "left", 10, 800,function(){
+                // move(box1,"width",10,500);
+            });
+            autoMove(btn2, box1, "left", 10, 0);
+            btn3.onclick = function () {
+                move(box1,"left");
+            }
+        }
+    </script>
+    <script type="text/javascript" src="./tools/myTools.js"></script>
+    <script type="text/javascript" src="./tools/autoMove.js"></script>
+</head>
+
+<body>
+    <button id="btn1" name="start">向左</button>
+    <button id="btn2" name="start">向右</button>
+    <button id="btn3">box2</button>
+    </br>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <div id="link"></div>
+</body>
+
+</html>

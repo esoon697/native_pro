@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        div{
+            width: 500px;
+            height: 100px;
+            overflow: hidden;
+        }
+
+        p{
+            width: 1000px;
+            height: 100px;
+            background-image: repeating-linear-gradient(45deg,black 0px,black 30px,white 30px, white 60px);
+            transition: 3s linear;
+        }
+        p:hover{
+            transform:translate(-500px)
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <p class="p1">曾经沧海难为水，除却巫山不是云</p>
+    </div>
+</body>
+
+</html>

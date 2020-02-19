@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 切换绝对定位四个角会切换坐标系的位置（正负轴方向颠倒） */
+        /* 不能说是颠倒，参照系不同的原因 */
+        .box{
+            width: 500px;
+            height: 500px;
+            background-color: pink;
+            position: absolute;
+        }
+        .box1{
+            width: 100px;
+            height: 100px;
+            background-color: #dedede;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="box1"></div>
+    </div>
+</body>
+
+</html>

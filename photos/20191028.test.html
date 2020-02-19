@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Image Slide</title>
+    <script>
+        var i = 0;
+        var max_i = 8;
+
+        function displayImage() {
+            var img = document.createElement("img");
+            img.onload = function () {
+                var div = document.getElementById("image");
+                while (div.childNodes.length > 0)
+                    div.removeChild(div.childNodes[0]);
+                div.appendChild(img);
+                if (i == max_i)
+                    i = 0;
+                else
+                    i++;
+                // window.setTimeout("displayImage();", 1000);
+                // window.setInterval("displayImage();", 1000);
+            }
+            img.src = "./" + i + ".jpg";
+        }
+    </script>
+</head>
+
+<body onload="displayImage();">
+    <div id="image">
+    </div>
+</body>
+
+</html>

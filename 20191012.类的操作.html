@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+
+        .box1 {
+            border: 10px solid hotpink;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var box = document.querySelector(".box");
+            var btn1 = document.querySelector("#btn1");
+            var btn2 = document.querySelector("#btn2");
+            var btn3 = document.querySelector("#btn3");
+            var btn4 = document.querySelector("#btn4");
+            var hasClassName = function (obj, tarClassName) {
+                var reg = new RegExp("\\b" + tarClassName + "\\b");
+                var res = reg.test(obj.className);
+                return res;
+            }
+            var addClass = function (obj, tarClassName) {
+                if (!hasClassName(obj, tarClassName)) {
+                    obj.className += " " + tarClassName;
+                }
+            }
+            var removeClass = function (obj, tarClassName) {
+                var reg = new RegExp("\\b" + tarClassName + "\\b","g");
+                obj.className = obj.className.replace(reg, "");
+            }
+            var changeClass = function (obj, tarClassName) {
+                if(hasClassName(obj, tarClassName)){
+                    removeClass(obj, tarClassName);
+                }else{
+                    addClass(obj, tarClassName);
+                }
+            }
+
+            btn1.onclick = function () {
+                addClass(box, "box1");
+            };
+            btn2.onclick = function () {
+                removeClass(box, "box1");
+            };
+            btn3.onclick = function () {
+                changeClass(box, "box2");
+            };
+        }
+    </script>
+</head>
+
+<body>
+    <button id="btn1">addClassName</button>
+    <button id="btn2">delClassName</button>
+    <button id="btn3">addClassName</button>
+    <br>
+    <div class="box"></div>
+</body>
+
+</html>

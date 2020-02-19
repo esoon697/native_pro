@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        var speed = 10;
+        var direction;
+        var div = document.querySelector("div");
+        timer = setInterval(function () {
+            switch (direction) {
+                case 37:
+                    div.style.left = div.offsetLeft - speed + "px";
+                    break;
+                case 38:
+                    div.style.top = div.offsetTop - speed + "px";
+                    break;
+                case 39:
+                    div.style.left = div.offsetLeft + speed + "px";
+                    break;
+                case 40:
+                    div.style.top = div.offsetTop + speed + "px";
+                    break;
+            }
+        }, 50);
+        document.onkeydown = function (event) {
+            event = event || window.event;
+            // console.log(event.keyCode);
+            direction = event.keyCode;
+            if (event.ctrlKey) {
+                speed = 50;
+            }
+        }
+        document.onkeyup = function () {
+            direction = 0;
+            speed = 10;
+        }
+    </script>
+</body>
+
+</html>

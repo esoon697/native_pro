@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="cn-zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script type="text/javascript" src="/HTML5/jQuery/jquery-1.12.3.js"></script> -->
+    <script type="text/javascript" src="E:\HtmlLearnning\HTML5\jQuery\jquery-1.12.3.js"></script>
+    <script>
+        $(function () {
+            $('.jquery').click(function () {
+                var inpValue = $('.input').val();
+                alert(inpValue);
+            })
+        })
+    </script>
+</head>
+<body>
+    <label for="input1">input</label><input type="text" class="input" id="input1">
+    <br>
+    <button class="proto">proto</button>
+    <button class="jquery">jquery</button>
+</body>
+</html>

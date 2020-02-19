@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body style="height: 1000px">
+    <div></div>
+    <script>
+        var html = document.documentElement
+        var div = document.querySelector("div");
+        // console.log(scroll);
+        div.onwheel = function (event) {
+            event = event || window.event;
+            if(event.deltaY>0 || event.wheelDelta<0){
+                // alert("向下");
+                div.style.height = div.clientHeight + 10 +"px"
+
+            }else{
+                // alert("向上");
+                div.style.height = div.clientHeight - 10 +"px"
+            }
+            //取消滚动条默认行为,通过addEventListener()添加的事件只能通过event.preventDefault()的方式取消;
+            event.preventDefault && event.preventDefault();//没有兼容ie8
+            //取消滚动条默认行为（当夜页面存在滚动条时，鼠标在div内滑动滚轮也不会滑动页面）
+            return false;
+        }
+        // div.addEventListener("mousewheel", div.onwheel, false);
+        bind(div,"mousewheel", div.onwheel);
+        function bind(obj, eventstr, callbackFun) {
+            if (obj.addEventListener) {
+                obj.addEventListener(eventstr, callbackFun, false)
+            } else {
+                obj.attachEvent("on"+eventstr, function(){
+                    callbackFun.call(obj);
+                    //callbackFun.call(obj),该方法中的回调函数中的this也指向调用对象
+                })
+            }
+        }
+    </script>
+</body>
+
+</html>

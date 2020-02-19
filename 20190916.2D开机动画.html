@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        html,
+        body {
+            height: 100%;
+            background-color: black;
+        }
+
+        .wrap {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font: 20px/1 "微软雅黑";
+        }
+
+        .wrap span {
+            display: block;
+            float: left;
+            margin: 3px;
+
+        }
+
+        .wrap span:nth-of-type(odd) {
+            animation: move 1s linear infinite alternate;
+        }
+
+        .wrap span:nth-of-type(even) {
+            animation: move 1s linear infinite alternate-reverse;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateY(4px);
+                color: transparent
+            }
+
+            100% {
+                transform: translateY(-4px);
+                color: gray;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <span>曾</span>
+        <span>经</span>
+        <span>沧</span>
+        <span>海</span>
+        <span>难</span>
+        <span>为</span>
+        <span>水</span>
+        <span>，</span>
+        <span>除</span>
+        <span>却</span>
+        <span>巫</span>
+        <span>山</span>
+        <span>不</span>
+        <span>是</span>
+        <span>云</span>
+        <span>。</span>
+    </div>
+</body>
+
+</html>

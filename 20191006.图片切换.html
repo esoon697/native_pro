@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0
+        }
+        .wrap {
+            width: 500px;
+            /* height: 300px; */
+            /* overflow: hidden; */
+            margin: 0 auto;
+            text-align: center;
+            background-color: #dedede
+        }
+
+        img {
+            width: 500px;
+            height: 500px;
+            margin-bottom: 10px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <p id="info"></p>
+        <img src="./photos/1.jpg" alt="">
+        <button id="last">上一张</button>
+        <button id="next">下一张</button>
+    </div>
+
+    <script>
+        var index = 0;
+        var img = document.getElementsByTagName("img")[0];
+        var imgArr = ["./photos/1.jpg", "./photos/2.jpg", "./photos/3.jpg", "./photos/4.jpg", "./photos/5.jpg"]
+        var info = document.getElementById("info");
+        info.innerHTML = "一共" + imgArr.length + "张图片，" + "第" + (index + 1) + "张。";
+
+        function btnFun(paraId, btnFun) {
+            var btn = document.getElementById(paraId);
+            btn.onclick = btnFun
+        }
+        btnFun("last", function () {
+            index--
+            if (index < 0) {
+                index = imgArr.length - 1;
+            }
+            img.src = imgArr[index];
+            info.innerHTML = "一共" + imgArr.length + "张图片，" + "第" + (index + 1) + "张。";
+        })
+        btnFun("next", function () {
+            index++
+            if (index > imgArr.length - 1) {
+                index = 0;
+            }
+            img.src = imgArr[index];
+            info.innerHTML = "一共" + imgArr.length + "张图片，" + "第" + (index + 1) + "张。";
+        })
+
+        // for(var i = 0; i<5; i++){
+        //     console.log(i);
+        // }
+    </script>
+</body>
+
+</html>

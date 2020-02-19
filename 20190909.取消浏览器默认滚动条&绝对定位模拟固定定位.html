@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        /* 获取初始包含块的高度，隐藏超出部分内容，去除默认滚动条 */
+        html {
+            height: 100%;
+            overflow: hidden;
+        }
+        /* 获取html高度，让滚动条出现在body上 */
+        body {
+            height: 100%;
+            overflow: auto;
+        }
+        /*  1.绝对定位脱离文档流，以初始包含块为初始位置，初始包含块位置始终不变，与默认浏览器窗口重合
+            2.由于滚动条在body上面，所以初始包含块位置始终未移动，同理绝对定位元素也未移动，所以可模拟固定定位功能*/
+        .box3 {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <div class="box2" style="height: 5000px">
+            <div class="box3"></div>
+        </div>
+    </div>
+</body>
+
+</html>

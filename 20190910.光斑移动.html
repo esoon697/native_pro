@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>光斑移动</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        html,body{
+            background-color: black;
+        }
+        p {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            font: bold 45px "微软雅黑";
+            color: rgba(255, 255, 255, 0.3);
+            background: linear-gradient(120deg, rgba(255,255,255,0) 100px, white 150px, rgba(255,255,255,0) 210px) no-repeat;
+            -webkit-background-clip: text;
+            animation: myAnimation 5s linear infinite;
+        }
+
+        @keyframes myAnimation {
+            0% {
+               background-position: -200px 0px;
+            }
+            100%{
+                background-position: 575px 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <p class="p1">曾经沧海难为水，除却巫山不是云</p>
+    </div>
+</body>
+
+</html>

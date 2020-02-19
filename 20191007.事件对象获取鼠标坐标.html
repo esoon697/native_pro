@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #moveDiv {
+            width: 500px;
+            height: 200px;
+            background-color: #dedede;
+        }
+
+        #showDiv {
+            width: 500px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: grey;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="moveDiv"></div>
+    <div id="showDiv"></div>
+    <script>
+        var moveDiv = document.getElementById("moveDiv");
+        var showDiv = document.getElementById("showDiv");
+        moveDiv.onmousemove = function (event) {
+            var x = event.clientX;
+            var y = event.clientY;
+            showDiv.innerHTML = "X=" + x + " " + "Y+" + y
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            /* position: fixed; */
+            /* 不使用固定定位 */
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body style="height: 1000px; width: 1000px;">
+    sdajhfb
+    <div></div>
+    <script>
+        var div = document.getElementsByTagName("div")[0];
+        drag(div);
+        function drag(obj) {
+            obj.onmousedown = function (event) {
+                // alert(obj.setCapture());
+                // if (obj.setCapture) {
+                //     obj.setCapture();
+                // }
+                //解决ie8全选后，他元素会被选中拖拽
+                obj.setCapture && obj.setCapture();
+                event = event || window.event;
+                //求出obj中鼠标的坐标
+                var xDiv = event.clientX - obj.offsetLeft;
+                var yDiv = event.clientY - obj.offsetTop;
+                console.log("xDiv:" + xDiv + " " + "yDiv:" + yDiv);
+                document.onmousemove = function (event) {
+                    //解决ie8不会将事件对象传递到响应函数内，造成的兼容问题
+                    event = event || window.event;
+                    //解决chrome认为默认滚动条在body上，而其他浏览器在html上的兼容问题
+                    var sl = document.documentElement.scrollLeft || document.body.scrollLeft;
+                    var st = document.documentElement.scrollTop || document.body.scrollTop;
+                    var x = event.clientX;
+                    var y = event.clientY;
+                    obj.style.left = (x - xDiv + sl) + "px";
+                    obj.style.top = (y - yDiv + st) + "px";
+                }
+                document.onmouseup = function (event) {
+                    event = event || window.event;
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                    //解决ie8全选后，他元素会被选中拖拽
+                    obj.releaseCapture && obj.releaseCapture();
+                }
+                //取消全选状态下，其他元素会被选中拖拽，不至此ie8
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>
